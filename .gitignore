@@ -91,3 +91,6 @@ ENV/
 
 # Login creds
 Args.py
+
+# Vim!
+*.swp
