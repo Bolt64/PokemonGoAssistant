@@ -20,10 +20,15 @@ log.setLevel(logging.INFO)
 
 
 TIMESTAMP = '\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000'
-REQ_SLEEP = 1
+REQ_SLEEP = 0.5
 api = PGoApi()
 
-def login(args, position):
+def login(args, position_without_alt, without_alt = True):
+    if without_alt:
+        position = position_without_alt + (0,)
+    else:
+        position = position_without_alt
+
     log.info('Attempting login to Pokemon Go.')
 
     api.set_position(*position)
@@ -59,8 +64,9 @@ def generate_location_steps(initial_location, num_steps):
         x, y = x + dx, y + dy
 
 
-def search(position, num_steps, login_creds):
+def search(position_without_alt, num_steps, login_creds):
 
+    position = position_without_alt + (0,)
     parsed_maps = []
 
     if api._auth_provider and api._auth_provider._ticket_expire:
@@ -69,9 +75,9 @@ def search(position, num_steps, login_creds):
         if remaining_time > 60:
             log.info("Skipping Pokemon Go login process since already logged in for another {:.2f} seconds".format(remaining_time))
         else:
-            login(login_creds, position)
+            login(login_creds, position, False)
     else:
-        login(login_creds, position)
+        login(login_creds, position, False)
 
     i = 1
     for step_location in generate_location_steps(position, num_steps):
@@ -86,7 +92,8 @@ def search(position, num_steps, login_creds):
 
         try:
             # test_list.append(response_dict)
-            parsed_maps.append(parse_map(response_dict))
+            yield parse_map(response_dict)
+            # parsed_maps.append(parse_map(response_dict))
         except KeyError:
             log.error('Scan step failed. Response dictionary key error.')
 
@@ -94,7 +101,7 @@ def search(position, num_steps, login_creds):
         i += 1
         time.sleep(REQ_SLEEP)
 
-    return parsed_maps
+    # return parsed_maps
 
 
 def parse_map(map_dict):

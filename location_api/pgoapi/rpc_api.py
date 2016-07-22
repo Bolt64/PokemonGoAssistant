@@ -124,7 +124,7 @@ class RpcApi:
                 entry_name = RpcEnum.RequestMethod.Name(entry_id)
 
                 proto_name = to_camel_case(entry_name.lower()) + 'Request'
-                proto_classname = 'app.pgoapi.protos.RpcSub_pb2.' + proto_name
+                proto_classname = 'location_api.pgoapi.protos.RpcSub_pb2.' + proto_name
                 subrequest_extension = get_class(proto_classname)()
 
                 for (key, value) in entry_content.items():
@@ -197,7 +197,7 @@ class RpcApi:
 
             entry_name = RpcEnum.RequestMethod.Name(entry_id)
             proto_name = to_camel_case(entry_name.lower()) + 'Response'
-            proto_classname = 'app.pgoapi.protos.RpcSub_pb2.' + proto_name
+            proto_classname = 'location_api.pgoapi.protos.RpcSub_pb2.' + proto_name
 
             subresponse_return = None
             try:

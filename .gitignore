@@ -94,3 +94,6 @@ Args.py
 
 # Vim!
 *.swp
+
+# database
+database.db
