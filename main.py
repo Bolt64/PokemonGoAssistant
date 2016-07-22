@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import pogom.search as ps
-import pogom.utils as utils
-import pogom.Args as Args
+import app.search as ps
+import app.utils as utils
+import app.Args as Args
 from geopy.distance import distance
 
 def get_nearby_pokemon(position, num_steps, logged_in = False):
@@ -31,8 +31,8 @@ def print_listing(observed_pokemon, position, pokenames):
 
 def main():
     pokenames = utils.load_pokemon_names("pokemon_names.txt")
-    position = (13, 77.5, 0)
-    num_steps = 3
+    position = (51, 0, 0)
+    num_steps = 5
     observed_pokemon = get_nearby_pokemon(position, num_steps)
     print_listing(observed_pokemon, position, pokenames)
 

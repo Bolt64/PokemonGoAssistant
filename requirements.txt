@@ -1,0 +1,8 @@
+future==0.15.2
+geopy==1.11.0
+gpsoauth==0.3.0
+protobuf==2.6.1
+protobuf-to-dict==0.1.0
+pycryptodomex==3.4.2
+requests==2.10.0
+s2sphere==0.2.4
