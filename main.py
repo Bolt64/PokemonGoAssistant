@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 import app.search as ps
 import app.utils as utils
@@ -30,7 +30,7 @@ def print_listing(observed_pokemon, position, pokenames):
         print("")
 
 def main():
-    pokenames = utils.load_pokemon_names("pokemon_names.txt")
+    pokenames = utils.load_pokemon_names("static/pokemon_names.data")
     position = (51, 0, 0)
     num_steps = 5
     observed_pokemon = get_nearby_pokemon(position, num_steps)

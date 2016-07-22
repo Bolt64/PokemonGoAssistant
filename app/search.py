@@ -85,7 +85,6 @@ def search(position, num_steps, login_creds):
             time.sleep(REQ_SLEEP)
 
         try:
-            # test_list.append(response_dict)
             parsed_maps.append(parse_map(response_dict))
         except KeyError:
             log.error('Scan step failed. Response dictionary key error.')
