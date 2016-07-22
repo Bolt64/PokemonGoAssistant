@@ -92,17 +92,10 @@ def cleanup_db():
                             # (source_latitude, source_longitude))
     # location_query.execute()
 
-    query = Pokemon.select().where(\
-                            (Pokemon.source_latitude, Pokemon.source_longitude) !=\
-                            (source_latitude, source_longitude))
-    for i in query:
-        print(i.pokemon_id)
-
-    pokemon_query = Pokemon.delete().where(\
-                            (Pokemon.source_latitude, Pokemon.source_longitude) !=\
-                            (source_latitude, source_longitude))
-    res = pokemon_query.execute()
-    print(res)
+    pokemon_query = Pokemon.select().execute()
+    for pokemon in pokemon_query:
+        if (pokemon.source_latitude, pokemon.source_longitude) != (source_latitude, source_longitude):
+            pokemon.delete_instance()
 
     Pokemon.delete_inactive()
 

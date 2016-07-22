@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<link href='/static/navbar.css' rel='stylesheet' type='text/css'>
+{% block css_imports %}{% endblock %}
+
+<title>{% block title %}{% endblock %}</title>
+
+<body>
+  <div id="navigation">
+      <a href="/nearby">Nearby</a>
+      <a href="/parameters">Adjust parameters</a>
+  </div>
+  {% block content %}{% endblock %}
+</body>

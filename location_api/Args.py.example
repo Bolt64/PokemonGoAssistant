@@ -1,0 +1,8 @@
+"""
+Login creds for Pokemon Go servers. Temporary measure
+"""
+
+class args():
+    auth_service = "google"
+    username = "email@gmail.com"
+    password = "password"

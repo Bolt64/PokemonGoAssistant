@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block css_imports %}
+    <link href='static/input_nice.css' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block title %}
+    Adjust Parameters
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<script>
+var x = document.getElementById("location");
+
+var geoOptions = {
+  enableHighAccuracy: true
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    document.getElementById('latitude').value= position.coords.latitude;
+    document.getElementById('longitude').value= position.coords.longitude;
+}
+</script>
+
+<div class="input-block">
+<h1>Adjust Parameters</h1>
+<form role="form" method="post" action="">
+  {{ form.csrf_token }}
+  <p>
+    {{ form.step_num(placeholder="number of steps") }}
+    <span class="error">
+      {% if form.step_num.errors %}
+        {% for error in form.step_num.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </p>
+  <p id="location">
+  {{ form.latitude(placeholder="latitude") }}
+    <span class="error">
+      {% if form.latitude.errors %}
+        {% for error in form.latitude.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+      {% if error %}
+
+        {{ error.strip() }}
+      {% endif %}
+    </span>
+  </p>
+  <p>
+  {{ form.longitude(placeholder="longitude") }}
+    <span class="error">
+      {% if form.longitude.errors %}
+        {% for error in form.longitude.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+      {% if error %}
+
+        {{ error.strip() }}
+      {% endif %}
+    </span>
+  <br>
+  <div class="fancy-button">
+      <button onclick="getLocation()" type="button">Geolocate</button>
+      <button class="btn btn-sm btn-success" type="submit">Submit</button>
+  </div>
+</form>
+<div class="status">
+    {{ "Current search radius: {0}".format(num_steps) }}
+    <br>
+    {{ "Current latitude: {0}".format(latitude) }}
+    <br>
+    {{ "Current longitude: {0}".format(longitude) }}
+</div>
+</div>
+{% endblock %}

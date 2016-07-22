@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block css_imports %}
+  <link href='static/table.css' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block title %}
+    Nearby Pokemon
+{% endblock %}
+
+{% block content %}
+    <div id="table_content">
+    <table id="ver-minimalist"
+           width="100%"
+           align="center">
+    <tr>
+        <th>Pokemon</th>
+        <th>Distance (m)</th>
+        <th>Despawn time</th>
+        <th>Location</th>
+    </tr>
+    {% for pokemon in pokedata %}
+    <tr>
+        <td>{{ pokemon["pokemon_name"] }}</td>
+        <td>{{ pokemon["distance"] }}</td>
+        <td>{{ "{0}:{1:02d}".format(pokemon["disappear_time"].hour, pokemon["disappear_time"].minute) }}</td>
+        <td><a href={{ pokemon["url"] }}>Maps</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+{% endblock %}

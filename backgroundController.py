@@ -61,10 +61,5 @@ def upsert_parsed_map(parsed_map, source_location):
         # print(pokestop["pokestop_id"])
         # models.Pokestop.create(**pokestop)
 
-def test():
-    import location_api.search as ps
-    import location_api.Args as Args
-    ps.login(Args.args, (51,0))
-    for cell in ps.search((51,0), 5, Args.args):
-        print("Upserting")
-        upsert_parsed_map(cell, (51, 0))
+if __name__=="__main__":
+    search_loop()
